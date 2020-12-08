@@ -1,0 +1,109 @@
+QUES.1 Missing number in array
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int actualSum = 0; 
+        int expectedSum = n * (n + 1) / 2;
+        
+        for (int i = 0; i < n; i++)
+            actualSum += nums[i];
+        return expectedSum - actualSum;
+    }
+};
+
+QUES.2 Remove duplicates from Sorted Array
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        int n = nums.size();
+        if (n == 0) 
+            return 0;
+        int i = 0;
+        for(int j = 0 ; j < n ; j++)
+        {
+            if (nums[j] != nums[i]) 
+            {
+                i++;
+                nums[i] = nums[j];
+            }
+        }
+        return i + 1 ;
+    }
+};
+
+QUES.3 Maximum Subarray
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxSoFar = INT_MIN;
+        int maxEndingHere = 0; 
+        for (int i = 0 ; i < nums.size() ; i++) 
+        {
+            maxEndingHere += nums[i]; 
+            if (maxSoFar < maxEndingHere) 
+                maxSoFar = maxEndingHere; 
+            if (maxEndingHere < 0)
+                maxEndingHere = 0; 
+        } 
+        return maxSoFar; 
+    }
+};
+
+
+QUES.4 Spiral Matrix
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+      int m = matrix.size(), n = m ? matrix[0].size() : 0, ru = 0, rd = m - 1, cl = 0, cr = n - 1, p = 0;
+        vector<int> order(m * n);
+        while (ru <= rd && cl <= cr) {
+            for (int col = cl; col <= cr; col++) {
+                order[p++] = matrix[ru][col];
+            }
+            if (++ru > rd) {
+                break;
+            }
+            for (int row = ru; row <= rd; row++) {
+                order[p++] = matrix[row][cr];
+            }
+            if (--cr < cl) {
+                break;
+            }
+            for (int col = cr; col >= cl; col--) {
+                order[p++] = matrix[rd][col];
+            }
+            if (--rd < ru) {
+                break;
+            }
+            for (int row = rd; row >= ru; row--) {
+                order[p++] = matrix[row][cl];
+            }
+            if (cl++ > cr) {
+                break;
+            }
+        }
+        return order;
+    }
+};
+
+QUES.5 Rotate Array
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        k %= nums.size();
+        int temp, previous;
+        for (int i = 0; i < k; i++) 
+        {
+            previous = nums[nums.size() - 1];
+            for (int j = 0 ; j < nums.size() ; j++) 
+            {
+                temp = nums[j];
+                nums[j] = previous;
+                previous = temp;
+      }
+    }
+    }
+};
+
+QUES.6 Product Of array except self
